@@ -1,0 +1,31 @@
+{
+  "name": "movie_api",
+  "description": "Movie API",
+  "version": "0.1.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SHA888/movie-api.git"
+  },
+  "keywords": [
+    "movie",
+    "api"
+  ],
+  "author": "Kresna Sucandra",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SHA888/movie-api/issues"
+  },
+  "homepage": "https://github.com/SHA888/movie-api#readme",
+  "dependencies": {
+    "body-parser": "^1.19.2",
+    "express": "^4.17.3",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "eslint": "^8.11.0"
+  }
+}
