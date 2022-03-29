@@ -7,6 +7,18 @@ const app = express();
 const bodyParser = require("body-parser"),
   methodOverride = require("method-override");
 
+let users = [{
+    id: 0,
+    name: 'Alice',
+    favMovies: []
+  },
+  {
+    id: ``,
+    name: 'Bob',
+    favMovies: []
+  }
+];
+
 let topMovies = [{
     title: "A Space Oddyssey",
     year: 1968,
@@ -128,8 +140,6 @@ let topMovies = [{
     featured: true,
   },
 ];
-
-let users = [];
 
 // Morgan middleware
 app.use(morgan("common"));
