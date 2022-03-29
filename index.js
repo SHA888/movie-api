@@ -144,17 +144,15 @@ app.get("/", (req, res) => {
     res.send("Welcome to Movie App!");
 });
 
-// Show movies
-// app.get("/movies", (req, res) => {
-//     res.json(topMovies);
-// });
-
-//Serving Static Files
-// app.use(express.static("public"));
+// Serving Static Files
+app.use(express.static("public"));
 
 // Task 2.5
 
 // Return a list of ALL movies to the user
+app.get("/movies", (req, res) => {
+    res.json(topMovies);
+});
 
 // Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user
 
