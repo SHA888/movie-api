@@ -159,21 +159,21 @@ app.get("/movies", (req, res) => {
 // Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user
 app.get("/movies/:title", (req, res) => {
   res.json(topMovies.find((movie) => {
-    return movie.title === req.params.title
+    return movie.title === req.params.title;
   }));
 });
 
 // Return data about a genre (decription) by name/title (e.g., "Thriller")
 app.get("/movies/:title/:genre", (req, res) => {
   res.json(topMovies.find((movie) => {
-    return movie.genre === req.params.genre
+    return movie.genre === req.params.genre;
   }));
 });
 
 // Return data about a director (name, birth year, death year) by name
 app.get("/movies/:title/:director", (req, res) => {
   res.json(topMovies.find((movie) => {
-    return movie.director === req.params.director
+    return movie.director === req.params.director;
   }));
 });
 
@@ -192,13 +192,60 @@ app.post("/users", (req, res) => {
 });
 
 // Allow users to update their user info (username)
-app.put("/users", );
+app.put("/users/:username", (req, res) => {
+  let user = users.find((user) => {
+    return user.username === req.params.username;
+  });
+
+  if (user) {
+    user.username = req.params.username;
+    res.status(201).send("Username of " + req.params.username + "was updated");
+  } else {
+    res.status(404).send("Username of " + req.params.username + "was not found");
+  }
+});
 
 // Allow users to add a movie to their list of favorites (showing only a text that a movie has been added—more on this later)
+app.post("/movies", (req, res) => {
+  let newMovie = req.body;
+
+  if (!newMovie.title) {
+    const message = "Missing title in request body";
+    res.status(400).send(message);
+  } else {
+    newMovie.id = uuid.v4();
+    movies.push(newMovie);
+    res.status(201).send(newMovie);
+  }
+});
 
 // Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)
+app.delete("/movies/:title", (req, res) => {
+  let movie = movies.find((movie) => {
+    return movie.title === req.params.title;
+  });
+
+  if (movie) {
+    movies = movies.filter((obj) => {
+      return obj.title !== req.params.title;
+    });
+    res.status(201).send("Movie " + req.params.title + " was deleted");
+  }
+});
 
 // Allow existing users to deregister (showing only a text that a user email has been removed—more on this later)
+app.delete("users/:email", (req, res) => {
+  let user = users.find((user) => {
+    return user.email === req.params.email;
+  });
+
+  if (user) {
+    users = users.filter((obj) => {
+      return obj.email !== req.params.email;
+    });
+    res.status(201).send(" Email " + req.params.email + " has been removed.");
+  }
+});
 
 //Error Handling
 app.use((err, req, res, next) => {
