@@ -157,20 +157,27 @@ app.get("/", (req, res) => {
 });
 
 // Serving Static Files
-app.use(express.static("public"));
+// app.use(express.static("public"));
 
 // Task 2.5
 
 // Return a list of ALL movies to the user
 app.get("/movies", (req, res) => {
-  res.json(topMovies);
+  res.status(200).json(topMovies);
 });
 
 // Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user
 app.get("/movies/:title", (req, res) => {
-  res.json(topMovies.find((movie) => {
-    return movie.title === req.params.title;
-  }));
+  const {
+    title
+  } = req.params;
+  const movie = movies.find(m => m.title === title);
+
+  if (movie) {
+    res.status(200).json(movie);
+  } else {
+    res.status(400).send("Movie not found");
+  }
 });
 
 // Return data about a genre (decription) by name/title (e.g., "Thriller")
@@ -186,6 +193,12 @@ app.get("/movies/:title/:director", (req, res) => {
     return movie.director === req.params.director;
   }));
 });
+
+// Additional self-task: return a list of ALL users
+app.get("/users", (req, res) => {
+  res.status(200).json(users);
+});
+
 
 // Allow new users to register
 app.post("/users", (req, res) => {
