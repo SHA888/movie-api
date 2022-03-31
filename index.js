@@ -8,14 +8,14 @@ const bodyParser = require("body-parser"),
   methodOverride = require("method-override");
 
 let users = [{
-    id: 0,
+    id: 1,
     name: 'Alice',
     favMovies: []
   },
   {
-    id: ``,
+    id: 2,
     name: 'Bob',
-    favMovies: []
+    favMovies: ["A Space Oddyssey"]
   }
 ];
 
@@ -24,7 +24,7 @@ let topMovies = [{
     year: 1968,
     genre: "Science fiction",
     img: "https://media.timeout.com/images/105455969/750/562/image.jpg",
-    directors: [{
+    director: [{
       name: "Stanley Kubrick",
       birth: 1928,
       death: 1999,
@@ -36,7 +36,7 @@ let topMovies = [{
     year: 1972,
     genre: "Thrillers",
     img: "https://media.timeout.com/images/105455970/750/562/image.jpg",
-    directors: [{
+    director: [{
       name: "Francis Ford Coppola",
       birth: 1939,
       death: null,
@@ -48,7 +48,7 @@ let topMovies = [{
     year: 1941,
     genre: "Drama",
     img: "https://media.timeout.com/images/105455971/750/562/image.jpg",
-    directors: [{
+    director: [{
       name: "Orson Welles",
       birth: 1915,
       death: 1985,
@@ -60,7 +60,7 @@ let topMovies = [{
     year: 1975,
     genre: "",
     img: "https://media.timeout.com/images/105455972/750/562/image.jpg",
-    directors: [{
+    director: [{
       name: "Chantal Anne Akerman",
       birth: 1950,
       death: 2015,
@@ -72,7 +72,7 @@ let topMovies = [{
     year: 1981,
     genre: "Action",
     img: "https://media.timeout.com/images/105455973/750/562/image.jpg",
-    directors: [{
+    director: [{
       name: "Steven Spielberg",
       birth: 1946,
       death: null,
@@ -84,7 +84,7 @@ let topMovies = [{
     year: 1960,
     genre: "Drama",
     img: "https://media.timeout.com/images/105456105/750/562/image.jpg",
-    directors: [{
+    director: [{
       name: "Federico Fellini",
       birth: 1920,
       death: 1993,
@@ -96,7 +96,7 @@ let topMovies = [{
     year: 1954,
     genre: "Action",
     img: "https://media.timeout.com/images/101714537/750/562/image.jpg",
-    directors: [{
+    director: [{
       name: "Akira Kurosawa",
       birth: 1910,
       death: 1998,
@@ -108,7 +108,7 @@ let topMovies = [{
     year: 2000,
     genre: "Drama",
     img: "https://media.timeout.com/images/105455977/750/562/image.jpg",
-    directors: [{
+    director: [{
       name: "Wong Kar-wai",
       birth: 1958,
       death: null,
@@ -120,7 +120,7 @@ let topMovies = [{
     year: 2007,
     genre: "Drama",
     img: "https://media.timeout.com/images/105455978/750/562/image.jpg",
-    directors: [{
+    director: [{
       name: "Paul Thomas Anderson",
       birth: 1970,
       death: null,
@@ -132,7 +132,7 @@ let topMovies = [{
     year: 1952,
     genre: "Comedy",
     img: "https://media.timeout.com/images/105455980/750/562/image.jpg",
-    directors: [{
+    director: [{
       name: "Stanley Donen",
       birth: 1924,
       death: 2019,
@@ -171,27 +171,42 @@ app.get("/movies/:title", (req, res) => {
   const {
     title
   } = req.params;
-  const movie = topMovies.find(m => m.title === title);
+  const movie = topMovies.find(movie => movie.title === title);
 
   if (movie) {
-    return res.status(200).json(movie);
+    res.status(200).json(movie);
   } else {
     res.status(400).send("Movie not found");
   }
 });
 
 // Return data about a genre (decription) by name/title (e.g., "Thriller")
-app.get("/movies/:title/:genre", (req, res) => {
-  res.json(topMovies.find((movie) => {
-    return movie.genre === req.params.genre;
-  }));
+app.get("/movies/genre/:genreName", (req, res) => {
+  const {
+    genreName
+  } = req.params;
+  const genre = topMovies.find(movie => movie.genre === genreName).genre;
+
+  if (genre) {
+    res.status(200).json(genre);
+  } else {
+    res.status(400).send("Genre not found");
+  }
 });
 
-// Return data about a director (name, birth year, death year) by name
-app.get("/movies/:title/:director", (req, res) => {
-  res.json(topMovies.find((movie) => {
-    return movie.director === req.params.director;
-  }));
+// TODO: Debug
+// Return data about a director (name, birth year, death year) by name 
+app.get("/movies/directors/:directorName", (req, res) => {
+  const {
+    directorName
+  } = req.params;
+  const director = topMovies.find(movie => movie.director.name === directorName).director;
+
+  if (director) {
+    res.status(200).json(director);
+  } else {
+    res.status(400).send("Director not found");
+  }
 });
 
 // Additional self-task: return a list of ALL users
@@ -200,73 +215,91 @@ app.get("/users", (req, res) => {
 });
 
 
+// TODO: Debug
 // Allow new users to register
 app.post("/users", (req, res) => {
-  let newUser = req.body;
+  const newUser = req.body;
 
-  if (!newUser.name) {
-    const message = "Missing username in request body.";
-    res.status(404).send(message);
-  } else {
+  if (newUser.name) {
     newUser.id = uuid.v4();
     users.push(newUser);
-    res.status(201).send(newUser);
+    res.status(201).json(newUser);
+  } else {
+    const message = "Missing name in request body.";
+    res.status(400).send(message);
   }
 });
 
 // Allow users to update their user info (username)
-app.put("/users/:username", (req, res) => {
-  let user = users.find((user) => {
-    return user.username === req.params.username;
-  });
+app.put("/users/:id", (req, res) => {
+  const {
+    id
+  } = req.params;
+  const updatedUser = req.body;
+
+  let user = users.find(user => user.id == id);
 
   if (user) {
-    user.username = req.params.username;
-    res.status(201).send("Username of " + req.params.username + "was updated");
+    user.name = updatedUser.name;
+    res.status(200).json(user)
   } else {
-    res.status(404).send("Username of " + req.params.username + "was not found");
+    const message = "User not found.";
+    res.status(400).send(message);
   }
 });
 
 // Allow users to add a movie to their list of favorites (showing only a text that a movie has been added—more on this later)
-app.post("/movies", (req, res) => {
-  let newMovie = req.body;
+app.post("/users/:id/:movieTitle", (req, res) => {
+  const {
+    id,
+    movieTitle
+  } = req.params;
 
-  if (!newMovie.title) {
-    const message = "Missing title in request body";
-    res.status(400).send(message);
+  let user = users.find(user => user.id == id);
+
+  if (user) {
+    user.favMovies.push(movieTitle);
+    res.status(200).json(`${movieTitle} has been added to user ${id}'s array`);
   } else {
-    newMovie.id = uuid.v4();
-    movies.push(newMovie);
-    res.status(201).send(newMovie);
+    const message = "Fav Movies not found";
+    res.status(400).send(message);
   }
+
 });
 
 // Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)
-app.delete("/movies/:title", (req, res) => {
-  let movie = movies.find((movie) => {
-    return movie.title === req.params.title;
-  });
+app.delete("/users/:id/:movieTitle", (req, res) => {
+  const {
+    id,
+    movieTitle
+  } = req.params;
 
-  if (movie) {
-    movies = movies.filter((obj) => {
-      return obj.title !== req.params.title;
-    });
-    res.status(201).send("Movie " + req.params.title + " was deleted");
+  let user = users.find(user => user.id == id);
+
+  if (user) {
+    user.favMovies = user.favMovies.filter(title => title !== movieTitle);
+    res.status(200).json(`${movieTitle} has been removed from user ${id}'s array`);
+  } else {
+    const message = "Fav Movies not found";
+    res.status(400).send(message);
   }
+
 });
 
 // Allow existing users to deregister (showing only a text that a user email has been removed—more on this later)
-app.delete("users/:email", (req, res) => {
-  let user = users.find((user) => {
-    return user.email === req.params.email;
-  });
+app.delete("/users/:id", (req, res) => {
+  const {
+    id
+  } = req.params;
+
+  let user = users.find(user => user.id == id);
 
   if (user) {
-    users = users.filter((obj) => {
-      return obj.email !== req.params.email;
-    });
-    res.status(201).send(" Email " + req.params.email + " has been removed.");
+    users = users.filter(user => user.id != id);
+    res.status(200).json(`User ${id} has been deleted`);
+  } else {
+    const message = "User ID not found";
+    res.status(400).send(message);
   }
 });
 
