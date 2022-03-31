@@ -171,10 +171,10 @@ app.get("/movies/:title", (req, res) => {
   const {
     title
   } = req.params;
-  const movie = movies.find(m => m.title === title);
+  const movie = topMovies.find(m => m.title === title);
 
   if (movie) {
-    res.status(200).json(movie);
+    return res.status(200).json(movie);
   } else {
     res.status(400).send("Movie not found");
   }
