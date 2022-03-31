@@ -13,7 +13,9 @@
       width: 100%;
     }
 
-    code { color: red }
+    code {
+      color: red
+    }
 
     td,
     th {
@@ -73,7 +75,8 @@
         <th>URL</th>
         <th>HTTP Method</th>
         <th>Request Data Format</th>
-        <th>Response</th>
+        <th>Response Data Format</th>
+        <th>Examples (Postman Images)</th>
       </tr>
       <tr>
         <td>Return a list of ALL movies to the user</td>
@@ -81,6 +84,7 @@
         <td><code>GET</code></td>
         <td>None</td>
         <td>A JSON object holding data about all movies</td>
+        <td><a href="./images/all-movie.list.png" target="_blank">All movies</a></td>
       </tr>
       <tr>
         <td>Return data about a single movie by title to the user</td>
@@ -88,6 +92,7 @@
         <td><code>GET</code></td>
         <td>None</td>
         <td>A JSON object holding data about a movie by title</td>
+        <td><a href="./images/single-movie.png" target="_blank">Single movie</a></td>
       </tr>
       <tr>
         <td>Return data about a genre by title (e.g., “Thriller”)</td>
@@ -95,6 +100,7 @@
         <td><code>GET</code></td>
         <td>None</td>
         <td>A JSON object holding data about a genre</td>
+        <td><a href="./images/genre.png" target="_blank">Genre</a></td>
       </tr>
       <tr>
         <td>Return data about a director by name</td>
@@ -102,6 +108,7 @@
         <td><code>GET</code></td>
         <td>None</td>
         <td>A JSON object holding data about a director by name</td>
+        <td><a href="./images/director.png" target="_blank">Director</a></td>
       </tr>
       <tr>
         <td>Allow new users to register</td>
@@ -109,6 +116,7 @@
         <td><code>POST</code></td>
         <td>A JSON object holding data about newUser</td>
         <td>A JSON object about the new user</td>
+        <td><a href="./images/register-user.png" target="_blank">User registration</a></td>
       </tr>
       <tr>
         <td>Allow users to update their user info</td>
@@ -116,6 +124,7 @@
         <td><code>PUT</code></td>
         <td>A JSON object holding data about new info</td>
         <td>A JSON object about user's new info</td>
+        <td><a href="./images/update-info.png" target="_blank">Update user info</a></td>
       </tr>
       <tr>
         <td>Allow users to add a movie to their list of favorites</td>
@@ -123,6 +132,7 @@
         <td><code>POST</code></td>
         <td>None</td>
         <td>A message of response status</td>
+        <td><a href="./images/add-fav-movie.png" target="_blank">Add favorite movie</a></td>
       </tr>
       <tr>
         <td>Allow users to remove a movie from their list of favorites</td>
@@ -130,6 +140,7 @@
         <td><code>DELETE</code></td>
         <td>None</td>
         <td>A message of response status</td>
+        <td><a href="./images/remove-fav-movie.png" target="_blank">Remove favorite movie</a></td>
       </tr>
       <tr>
         <td>Allow existing users to deregister</td>
@@ -137,6 +148,7 @@
         <td><code>DELETE</code></td>
         <td>None</td>
         <td>A message of response status</td>
+        <td><a href="./images/delete-user.png" target="_blank">Delete user</a></td>
       </tr>
     </table>
   </div>
