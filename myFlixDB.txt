@@ -37,7 +37,8 @@ var movie1 = {
   },
   ImagePath: "https://media.timeout.com/images/105455969/750/562/image.jpg",
   Featured: true
-},
+}
+
 var movie2 = {
   Title: "The Godfather",
   ReleaseYear: "1972",
@@ -53,7 +54,8 @@ var movie2 = {
   },
   ImagePath: "https://media.timeout.com/images/105455970/750/562/image.jp",
   Featured: true
-},
+}
+
 var movie3 = {
   Title: "Citizen Kane",
   ReleaseYear: "1941",
@@ -70,7 +72,8 @@ var movie3 = {
   },
   ImagePath: "Retrieving data. Wait a few seconds and try to cut or copy again.",
   Featured: true
-},
+}
+
 var movie4 = {
   Title: "Jeanne Dielman, 23, Quai du Commerce, 1080 Bruxells",
   ReleaseYear: "1975",
@@ -87,7 +90,8 @@ var movie4 = {
   },
   ImagePath: "https://media.timeout.com/images/105455972/750/562/image.jpg",
   Featured: false
-},
+}
+
 var movie5 = {
   Title: "Raiders of the Lost Ark",
   ReleaseYear: "1981",
@@ -103,7 +107,8 @@ var movie5 = {
   },
   ImagePath: "https://media.timeout.com/images/105455973/750/562/image.jpg",
   Featured: true
-},
+}
+
 var movie6 = {
   Title: "La Dolce Vita",
   ReleaseYear: "1960",
@@ -120,7 +125,8 @@ var movie6 = {
   },
   ImagePath: "https://media.timeout.com/images/105456105/750/562/image.jpg",
   Featured: true
-},
+}
+
 var movie7 = {
   Title: "Seven Samurai",
   ReleaseYear: "1954",
@@ -137,98 +143,235 @@ var movie7 = {
   },
   ImagePath: "https://media.timeout.com/images/101714537/750/562/image.jpg",
   Featured: true
-},
+}
+
 var movie8 = {
   Title: "In the Mood for Love",
   ReleaseYear: "2000",
-  Description: "",
+  Description: "Can a film really be an instant classic? Anyone who watched In The Mood for Love when it was released in 2000 may have said yes. The second this love story opens, you sense you are in the hands of a master.",
   Genre: {
-    Name: "",
-    Description: ""
+    Name: "Drama",
+    Description: "Focused on emotions and defined by conflict, often looking to reality rather than sensationalism."
   },
   Director: {
-    Name: "",
-    Bio: "",
-    Birth: "",
-    Death: ""
+    Name: "Wong Kar-wai",
+    Bio: "Wong Kar-wai BBS is a Hong Kong film director, screenwriter, and producer. His films are characterised by nonlinear narratives, atmospheric music, and vivid cinematography involving bold, saturated colours. A pivotal figure of Hong Kong cinema, Wong is considered a contemporary auteur, and ranks third on Sight & Sound's 2002 poll of the greatest filmmakers of modern times.[note 1] His films frequently appear on best-of lists domestically and internationally.",
+    Birth: "1958"
   },
-  ImagePath: "",
+  ImagePath: "https://media.timeout.com/images/105455977/750/562/image.jpg",
   Featured: false
-},
-var movie9 = {
-  Title: "",
-  ReleaseYear: "",
-  Description: "",
-  Genre: {
-    Name: "",
-    Description: ""
-  },
-  Director: {
-    Name: "",
-    Bio: "",
-    Birth: "",
-    Death: ""
-  },
-  ImagePath: "",
-  Featured: true
-},
-var movie10 = {
-  Title: "",
-  ReleaseYear: "",
-  Description: "",
-  Genre: {
-    Name: "",
-    Description: ""
-  },
-  Director: {
-    Name: "",
-    Bio: "",
-    Birth: "",
-    Death: ""
-  },
-  ImagePath: "",
-  Featured: true
-},
-var movie11 = {
-  Title: "",
-  ReleaseYear: "",
-  Description: "",
-  Genre: {
-    Name: "",
-    Description: ""
-  },
-  Director: {
-    Name: "",
-    Bio: "",
-    Birth: "",
-    Death: ""
-  },
-  ImagePath: "",
-  Featured: true
-},
-var movie12 = {
-  Title: "",
-  ReleaseYear: "",
-  Description: "",
-  Genre: {
-    Name: "",
-    Description: ""
-  },
-  Director: {
-    Name: "",
-    Bio: "",
-    Birth: "",
-    Death: ""
-  },
-  ImagePath: "",
-  Featured: true
-},
+}
 
+var movie9 = {
+  Title: "There Will Be Blood",
+  ReleaseYear: "2007",
+  Description: "On the road to becoming the most significant filmmaker of the last 20 years, Paul Thomas Anderson transformed from a Scorsesian chronicler of debauched L.A.",
+  Genre: {
+    Name: "Drama",
+    Description: "Focused on emotions and defined by conflict, often looking to reality rather than sensationalism."
+  },
+  Director: {
+    Name: "Paul Thomas Anderson",
+    Bio: "Paul Thomas Anderson is an American film director, producer, screenwriter and cinematographer. He developed an interest in filmmaking from a young age. He made his feature-film debut with Hard Eight (1996). He found critical and commercial success with Boogie Nights (1997) and received further accolades with Magnolia (1999), an ensemble piece set in the San Fernando Valley, and Punch-Drunk Love (2002), a romantic comedy-drama film.",
+    Birth: "1970"
+  },
+  ImagePath: "https://media.timeout.com/images/105455978/750/562/image.jpg",
+  Featured: true
+}
+
+var movie10 = {
+  Title: "Singin' in the Rain",
+  ReleaseYear: "1952",
+  Description: "Forget The Artist—sorry Uggie—and relish instead the sheer, serotonin-enhancing verve of MGM’s glorious epitaph to cinema’s silent era.",
+  Genre: {
+    Name: "Comedy",
+    Description: "Defined by events that are primarily intended to make the audience laugh."
+  },
+  Director: {
+    Name: "Stanley Donen",
+    Bio: "Stanley Donen was an American film director and choreographer whose most celebrated works are On the Town (1949) and Singin' in the Rain (1952), both of which he co-directed with star Gene Kelly. His other films include Royal Wedding (1951), Seven Brides for Seven Brothers (1954), It's Always Fair Weather (1955), Funny Face (1957), Indiscreet (1958), and Charade (1963).",
+    Birth: "1924",
+    Death: "2019"
+  },
+  ImagePath: "https://media.timeout.com/images/105455980/750/562/image.jpg",
+  Featured: true
+}
+
+var movie11 = {
+  Title: "Saving Private Ryan",
+  ReleaseYear: "1998",
+  Description: "Saving Private Ryan is a 1998 American epic war film directed by Steven Spielberg and written by Robert Rodat. Set during the Invasion of Normandy in World War II, the film is known for its graphic portrayal of war, especially its depiction of the Omaha Beach assault during the Normandy landings.",
+  Genre: {
+    Name: "Drama",
+    Description: "Focused on emotions and defined by conflict, often looking to reality rather than sensationalism."
+  },
+  Director: {
+    Name: "Steven Spielberg",
+    Bio: "Steven Allan Spielbergis an American film director, producer, and screenwriter. He began his career in the New Hollywood era and is currently the most commercially successful director of all time. Spielberg is the recipient of various accolades, including three Academy Awards (with two for Best Director), a Kennedy Center honor, a Cecil B. DeMille Award, and an AFI Life Achievement Award.",
+    Birth: "1946"
+  },
+  ImagePath: "https://en.wikipedia.org/wiki/File:Saving_Private_Ryan_poster.jpg",
+  Featured: true
+}
+
+var movie12 = {
+  Title: "Ready Player One",
+  ReleaseYear: "2018",
+  Description: "Ready Player One is a 2018 American science fiction film based on Ernest Cline's novel of the same name. Directed by Steven Spielberg, from a screenplay by Zak Penn and Cline, it stars Tye Sheridan, Olivia Cooke, Ben Mendelsohn, Lena Waithe, T.J. Miller, Simon Pegg, and Mark Rylance.",
+  Genre: {
+    Name: "Science fiction",
+    Description: "Films are defined by a combination of imaginative speculation and a scientific or technological premise, making use of the changes and trajectory of technology and science."
+  },
+  Director: {
+    Name: "Steven Spielberg",
+    Bio: "Steven Allan Spielbergis an American film director, producer, and screenwriter. He began his career in the New Hollywood era and is currently the most commercially successful director of all time. Spielberg is the recipient of various accolades, including three Academy Awards (with two for Best Director), a Kennedy Center honor, a Cecil B. DeMille Award, and an AFI Life Achievement Award.",
+    Birth: "1946"
+  },
+  ImagePath: "Retrieving data. Wait a few seconds and try to cut or copy again.",
+  Featured: true
+}
+
+db.movies.insertMany(
+    [ 
+        movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8, movie9, movie10, movie11, movie12
+    ]
+)
+
+"acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("624fb0006c56f0ffb21e65f1"),
+                ObjectId("624fb0006c56f0ffb21e65f2"),
+                ObjectId("624fb0006c56f0ffb21e65f3"),
+                ObjectId("624fb0006c56f0ffb21e65f4"),
+                ObjectId("624fb0006c56f0ffb21e65f5"),
+                ObjectId("624fb0006c56f0ffb21e65f6"),
+                ObjectId("624fb0006c56f0ffb21e65f7"),
+                ObjectId("624fb0006c56f0ffb21e65f8"),
+                ObjectId("624fb0006c56f0ffb21e65f9"),
+                ObjectId("624fb0006c56f0ffb21e65fa"),
+                ObjectId("624fb0006c56f0ffb21e65fb"),
+                ObjectId("624fb0006c56f0ffb21e65fc")
+        ]
+}
+
+
+var user1 = {
+  Username: "Alice",
+  Password: "ISd2kD",
+  Email: "alice@wonderland.com",
+  Birth: new Date("1920-01-01")
+}
+
+var user2 = {
+  Username: "Bob",
+  Password: "amG6gN",
+  Email: "bob@marley.com",
+  Birth: new Date("1945-01-01")
+}
+
+var user3 = {
+  Username: "Charlie",
+  Password: "c0TAr2",
+  Email: "charlie@chaplin.com",
+  Birth: new Date("1889-01-01")
+}
+
+var user4 = {
+  Username: "Dave",
+  Password: "tx4ZKh",
+  Email: "dave@omoregie.com",
+  Birth: new Date("1988-01-01")
+}
+
+var user5 = {
+  Username: "Eve",
+  Password: "HPf5Ph",
+  Email: "eve@genesis.com",
+  Birth: new Date("1822-01-01")
+}
+
+
+db.users.insertMany(
+  [
+    user1, user2, user3, user4, user5
+  ]
+)
+
+"acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("624fb1a76c56f0ffb21e65fd"),
+                ObjectId("624fb1a76c56f0ffb21e65fe"),
+                ObjectId("624fb1a76c56f0ffb21e65ff"),
+                ObjectId("624fb1a76c56f0ffb21e6600"),
+                ObjectId("624fb1a76c56f0ffb21e6601")
+        ]
 
 
 db.movies.insertOne(movie1)
-db.movies.insertMany(
-    [ 
-        movie1, movie2, movie3, movie4
-    ]
+
+
+// UPDATE
+
+db.users.update(
+  { _id: ObjectId("624fb1a76c56f0ffb21e65fd") },
+  { $set: { FavoriteMovie: [
+    ObjectId("624fb0006c56f0ffb21e65f3"),
+    ObjectId("624fb0006c56f0ffb21e65f7"),
+    ObjectId("624fb0006c56f0ffb21e65fa")
+  ] }}
+)
+
+db.users.update(
+  { _id: ObjectId("624fb1a76c56f0ffb21e65fe") },
+  { $set: { FavoriteMovie: [
+    ObjectId("624fb0006c56f0ffb21e65fc"),
+    ObjectId("624fb0006c56f0ffb21e65f7")
+  ] }}
+)
+
+db.users.update(
+  { _id: ObjectId("624fb1a76c56f0ffb21e65ff") },
+  { $set: { FavoriteMovie: [
+    ObjectId("624fb0006c56f0ffb21e65f8"),
+    ObjectId("624fb0006c56f0ffb21e65f6"),
+    ObjectId("624fb0006c56f0ffb21e65f2"),
+    ObjectId("624fb0006c56f0ffb21e65fa")
+  ] }}
+)
+
+db.users.update(
+  { _id: ObjectId("624fb1a76c56f0ffb21e6600") },
+  { $set: { FavoriteMovie: [
+    ObjectId("624fb0006c56f0ffb21e65f3"),
+    ObjectId("624fb0006c56f0ffb21e65f4"),
+    ObjectId("624fb0006c56f0ffb21e65fc"),
+    ObjectId("624fb0006c56f0ffb21e65f9"),
+    ObjectId("624fb0006c56f0ffb21e65f1")
+  ] }}
+)
+
+db.users.update(
+  { _id: ObjectId("624fb1a76c56f0ffb21e6601") },
+  { $set: { FavoriteMovie: [
+    ObjectId("624fb0006c56f0ffb21e65fb"),
+    ObjectId("624fb0006c56f0ffb21e65fc")
+  ] }}
+)
+
+
+// Task
+
+db.movies.update(
+  { _id: ObjectId("624fb0006c56f0ffb21e65f1") },
+  { $set: { Description: "(Updated) The greatest film ever made began with the meeting of two brilliant minds: Stanley Kubrick and sci-fi seer Arthur C Clarke." } }
+)
+
+db.movies.updateMany(
+  { "Director.Name": "Steven Spielberg" },
+  { "$set": { "Director.Bio": "(Updated) Steven Allan Spielbergis an American film director, producer, and screenwriter. He began his career in the New Hollywood era and is currently the most commercially successful director of all time. Spielberg is the recipient of various accolades, including three Academy Awards (with two for Best Director), a Kennedy Center honor, a Cecil B. DeMille Award, and an AFI Life Achievement Award."  } }
+)
+
+db.users.update(
+  { _id: ObjectId("624fb1a76c56f0ffb21e6601") },
+  { $push: { FavoriteMovie: ObjectId("624fb0006c56f0ffb21e65f7") } }
 )
