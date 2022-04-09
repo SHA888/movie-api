@@ -2,15 +2,15 @@ const mongoose = require('mongoose');
 
 let movieSchema = mongoose.Schema({
     Title: {
-        type: 'string',
+        type: String,
         required: true,
     },
     ReleaseYear: {
-        type: 'string',
+        type: String,
         required: true,
     },
     Description: {
-        type: 'string',
+        type: String,
         required: true,
     },
     Genre: {
@@ -28,15 +28,15 @@ let movieSchema = mongoose.Schema({
 
 let userSchema = mongoose.Schema({
     Username: {
-        type: 'string',
+        type: String,
         required: true
     },
     Password: {
-        type: 'string',
+        type: String,
         required: true
     },
     Email: {
-        type: 'string',
+        type: String,
         required: true
     },
     Birtday: Date,
