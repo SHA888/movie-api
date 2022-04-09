@@ -14,6 +14,7 @@ const express = require("express"),
 
 const bodyParser = require("body-parser"),
   methodOverride = require("method-override");
+const { rest } = require('lodash');
 
 const app = express();
 
@@ -223,17 +224,43 @@ app.get("/users", (req, res) => {
 });
 
 // Allow new users to register
-app.post("/users", (req, res) => {
-  const newUser = req.body;
+// app.post("/users", (req, res) => {
+//   const newUser = req.body;
 
-  if (newUser.name) {
-    newUser.id = uuid.v4();
-    users.push(newUser);
-    res.status(201).json(newUser);
-  } else {
-    const message = "Missing name in request body.";
-    res.status(400).send(message);
-  }
+//   if (newUser.name) {
+//     newUser.id = uuid.v4();
+//     users.push(newUser);
+//     res.status(201).json(newUser);
+//   } else {
+//     const message = "Missing name in request body.";
+//     res.status(400).send(message);
+//   }
+// });
+
+app.post('/users', (req, res) => {
+  Users.findOne({ Username: req.body.username })
+  .then((user) => {
+    if (user) {
+      return res.status(400).send(req.body.Username + 'already exists');
+    } else {
+      Users
+      .create({
+        Username: req.body.Username,
+        Password: req.body.Password,
+        Email: req.body.Email,
+        Birthday: req.body.Birthday
+      })
+      .then((user) => {res.status(201).json(user) })
+      .catch((error) => {
+        console.error(error);
+        rest.status(500).send('Error: ' + error);
+      })
+    }
+  })
+  .catch((error) => {
+    console.error(error);
+    res.status(500).send('Error: ' + error);
+  });
 });
 
 // Allow users to update their user info (username)
