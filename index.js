@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Models = require('../models.js');
-
 const Movies = Models.Movie;
 const Users = Models.User;
 
@@ -13,10 +12,19 @@ const express = require("express"),
   morgan = require("morgan"),
   uuid = require("uuid");
 
-const app = express();
-
 const bodyParser = require("body-parser"),
   methodOverride = require("method-override");
+
+const app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
+app.use(morgan("common"));
+
+
 
 let users = [{
     id: 1,
@@ -151,12 +159,6 @@ let topMovies = [{
     "featured": true,
   },
 ];
-
-// Morgan middleware
-app.use(morgan("common"));
-
-// Body-parser middleware
-app.use(bodyParser.json());
 
 // Welcome message
 app.get("/", (req, res) => {
