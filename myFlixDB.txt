@@ -237,8 +237,7 @@ db.movies.insertMany(
     ]
 )
 
-"acknowledged" : true,
-        "insertedIds" : [
+
                 ObjectId("624fb0006c56f0ffb21e65f1"),
                 ObjectId("624fb0006c56f0ffb21e65f2"),
                 ObjectId("624fb0006c56f0ffb21e65f3"),
@@ -251,8 +250,21 @@ db.movies.insertMany(
                 ObjectId("624fb0006c56f0ffb21e65fa"),
                 ObjectId("624fb0006c56f0ffb21e65fb"),
                 ObjectId("624fb0006c56f0ffb21e65fc")
-        ]
-}
+
+
+// ver 2
+    ObjectId("6250e9abfb42d208254180cc"),
+		ObjectId("6250e9abfb42d208254180cd"),
+		ObjectId("6250e9abfb42d208254180ce"),
+		ObjectId("6250e9abfb42d208254180cf"),
+		ObjectId("6250e9abfb42d208254180d0"),
+		ObjectId("6250e9abfb42d208254180d1"),
+		ObjectId("6250e9abfb42d208254180d2"),
+		ObjectId("6250e9abfb42d208254180d3"),
+		ObjectId("6250e9abfb42d208254180d4"),
+		ObjectId("6250e9abfb42d208254180d5"),
+		ObjectId("6250e9abfb42d208254180d6"),
+		ObjectId("6250e9abfb42d208254180d7")
 
 
 var user1 = {
@@ -297,21 +309,28 @@ db.users.insertMany(
   ]
 )
 
-"acknowledged" : true,
-        "insertedIds" : [
+
+
                 ObjectId("624fb1a76c56f0ffb21e65fd"),
                 ObjectId("624fb1a76c56f0ffb21e65fe"),
                 ObjectId("624fb1a76c56f0ffb21e65ff"),
                 ObjectId("624fb1a76c56f0ffb21e6600"),
                 ObjectId("624fb1a76c56f0ffb21e6601")
-        ]
+
+// Ver 2
+    ObjectId("6250e9e2fb42d208254180d8"),
+		ObjectId("6250e9e2fb42d208254180d9"),
+		ObjectId("6250e9e2fb42d208254180da"),
+		ObjectId("6250e9e2fb42d208254180db"),
+		ObjectId("6250e9e2fb42d208254180dc")
+
 
 
 db.movies.insertOne(movie1)
 
 
 // UPDATE
-
+// User 1
 db.users.update(
   { _id: ObjectId("624fb1a76c56f0ffb21e65fd") },
   { $set: { FavoriteMovie: [
@@ -322,6 +341,17 @@ db.users.update(
 )
 
 db.users.update(
+  { _id: ObjectId("6250e9e2fb42d208254180d8") },
+  { $set: { FavoriteMovie: [
+    ObjectId("6250e9abfb42d208254180cf"),
+		ObjectId("6250e9abfb42d208254180d0"),
+		ObjectId("6250e9abfb42d208254180d1")
+  ] }}
+)
+
+
+// User2
+db.users.update(
   { _id: ObjectId("624fb1a76c56f0ffb21e65fe") },
   { $set: { FavoriteMovie: [
     ObjectId("624fb0006c56f0ffb21e65fc"),
@@ -329,6 +359,15 @@ db.users.update(
   ] }}
 )
 
+db.users.update(
+  { _id: ObjectId("6250e9e2fb42d208254180d9") },
+  { $set: { FavoriteMovie: [
+    ObjectId("6250e9abfb42d208254180d4"),
+		ObjectId("6250e9abfb42d208254180d5")
+  ] }}
+)
+
+// User3
 db.users.update(
   { _id: ObjectId("624fb1a76c56f0ffb21e65ff") },
   { $set: { FavoriteMovie: [
@@ -338,7 +377,17 @@ db.users.update(
     ObjectId("624fb0006c56f0ffb21e65fa")
   ] }}
 )
+db.users.update(
+  { _id: ObjectId("6250e9e2fb42d208254180da") },
+  { $set: { FavoriteMovie: [
+    ObjectId("6250e9abfb42d208254180cc"),
+		ObjectId("6250e9abfb42d208254180cd"),
+		ObjectId("6250e9abfb42d208254180ce"),
+		ObjectId("6250e9abfb42d208254180cf")
+  ] }}
+)
 
+// User4
 db.users.update(
   { _id: ObjectId("624fb1a76c56f0ffb21e6600") },
   { $set: { FavoriteMovie: [
@@ -351,10 +400,30 @@ db.users.update(
 )
 
 db.users.update(
+  { _id: ObjectId("6250e9e2fb42d208254180db") },
+  { $set: { FavoriteMovie: [
+    ObjectId("6250e9abfb42d208254180ce"),
+		ObjectId("6250e9abfb42d208254180cf"),
+		ObjectId("6250e9abfb42d208254180d0"),
+		ObjectId("6250e9abfb42d208254180d1"),
+		ObjectId("6250e9abfb42d208254180d2")
+  ] }}
+)
+
+// User5
+db.users.update(
   { _id: ObjectId("624fb1a76c56f0ffb21e6601") },
   { $set: { FavoriteMovie: [
     ObjectId("624fb0006c56f0ffb21e65fb"),
     ObjectId("624fb0006c56f0ffb21e65fc")
+  ] }}
+)
+
+db.users.update(
+  { _id: ObjectId("6250e9e2fb42d208254180dc") },
+  { $set: { FavoriteMovie: [
+    ObjectId("6250e9abfb42d208254180d6"),
+		ObjectId("6250e9abfb42d208254180d7")
   ] }}
 )
 
