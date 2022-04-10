@@ -39,7 +39,7 @@ let userSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    Birtday: Date,
+    Birthday: Date,
     FavoriteMovie: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Movie'
