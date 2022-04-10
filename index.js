@@ -178,7 +178,7 @@ app.post('/users/:Username/movies/:MovieID', (req, res) => {
       }
     }, {
       new: true
-    },
+    }, // this line makes sure that the updated document is returned
     (err, updatedUser) => {
       if (err) {
         console.error(err);
