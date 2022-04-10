@@ -88,7 +88,7 @@
       </tr>
       <tr>
         <td>Return data about a single movie by title to the user</td>
-        <td><code>/movies/:title</code></td>
+        <td><code>/movies/:Title</code></td>
         <td><code>GET</code></td>
         <td>None</td>
         <td>A JSON object holding data about a movie by title</td>
@@ -96,7 +96,7 @@
       </tr>
       <tr>
         <td>Return data about a genre by title (e.g., “Thriller”)</td>
-        <td><code>/movies/genre/:genreName</code></td>
+        <td><code>/genre/:Name</code></td>
         <td><code>GET</code></td>
         <td>None</td>
         <td>A JSON object holding data about a genre</td>
@@ -104,7 +104,7 @@
       </tr>
       <tr>
         <td>Return data about a director by name</td>
-        <td><code>/movies/directors/:directorName</code></td>
+        <td><code>/director/:Name</code></td>
         <td><code>GET</code></td>
         <td>None</td>
         <td>A JSON object holding data about a director by name</td>
@@ -120,7 +120,7 @@
       </tr>
       <tr>
         <td>Allow users to update their user info</td>
-        <td><code>/users/:id</code></td>
+        <td><code>/users/:Username</code></td>
         <td><code>PUT</code></td>
         <td>A JSON object holding data about new info</td>
         <td>A JSON object about user's new info</td>
@@ -128,7 +128,7 @@
       </tr>
       <tr>
         <td>Allow users to add a movie to their list of favorites</td>
-        <td><code>/users/:id/:movieTitle</code></td>
+        <td><code>/users/:Username/movies/:MovieID</code></td>
         <td><code>POST</code></td>
         <td>None</td>
         <td>A message of response status</td>
@@ -136,7 +136,7 @@
       </tr>
       <tr>
         <td>Allow users to remove a movie from their list of favorites</td>
-        <td><code>/users/:id/:movieTitle</code></td>
+        <td><code>/users/:Username/movies/:MovieID</code></td>
         <td><code>DELETE</code></td>
         <td>None</td>
         <td>A message of response status</td>
@@ -144,7 +144,7 @@
       </tr>
       <tr>
         <td>Allow existing users to deregister</td>
-        <td><code>/users/:id</code></td>
+        <td><code>/users/:Username</code></td>
         <td><code>DELETE</code></td>
         <td>None</td>
         <td>A message of response status</td>

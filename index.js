@@ -1,300 +1,236 @@
 const express = require("express"),
+  bodyParser = require("body-parser"),
   morgan = require("morgan"),
   uuid = require("uuid");
 
+const {
+  rest
+} = require('lodash');
+
+const mongoose = require('mongoose');
+const Models = require('./models.js');
+const Movies = Models.Movie;
+const Users = Models.User;
+
+mongoose.connect('mongodb://localhost:27017/test', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
 const app = express();
 
-const bodyParser = require("body-parser"),
-  methodOverride = require("method-override");
-
-let users = [{
-    id: 1,
-    name: "Alice",
-    favMovies: []
-  },
-  {
-    id: 2,
-    name: "Bob",
-    favMovies: ["A Space Oddyssey"]
-  }
-];
-
-let topMovies = [{
-    "title": "A Space Oddyssey",
-    "year": 1968,
-    "genre": "Science fiction",
-    "img": "https://media.timeout.com/images/105455969/750/562/image.jpg",
-    "director": {
-      "name": "Stanley Kubrick",
-      "birth": 1928,
-      "death": 1999,
-    },
-    "featured": true,
-  },
-  {
-    "title": "The Godfather",
-    "year": 1972,
-    "genre": "Thrillers",
-    "img": "https://media.timeout.com/images/105455970/750/562/image.jpg",
-    "director": {
-      "name": "Francis Ford Coppola",
-      "birth": 1939,
-      "death": null,
-    },
-    "featured": true,
-  },
-  {
-    "title": "Citizen Kane",
-    "year": 1941,
-    "genre": "Drama",
-    "img": "https://media.timeout.com/images/105455971/750/562/image.jpg",
-    "director": {
-      "name": "Orson Welles",
-      "birth": 1915,
-      "death": 1985,
-    },
-    "featured": true,
-  },
-  {
-    "title": "Jeanne Dielman, 23, Quai du Commerce, 1080 Bruxells",
-    "year": 1975,
-    "genre": "",
-    "img": "https://media.timeout.com/images/105455972/750/562/image.jpg",
-    "director": {
-      "name": "Chantal Anne Akerman",
-      "birth": 1950,
-      "death": 2015,
-    },
-    "featured": false,
-  },
-  {
-    "title": "Raiders of the Lost Ark",
-    "year": 1981,
-    "genre": "Action",
-    "img": "https://media.timeout.com/images/105455973/750/562/image.jpg",
-    "director": {
-      "name": "Steven Spielberg",
-      "birth": 1946,
-      "death": null,
-    },
-    "featured": true,
-  },
-  {
-    "title": "La Dolce Vita",
-    "year": 1960,
-    "genre": "Drama",
-    "img": "https://media.timeout.com/images/105456105/750/562/image.jpg",
-    "director": {
-      "name": "Federico Fellini",
-      "birth": 1920,
-      "death": 1993,
-    },
-    "featured": true,
-  },
-  {
-    "title": "Seven Samurai",
-    "year": 1954,
-    "genre": "Action",
-    "img": "https://media.timeout.com/images/101714537/750/562/image.jpg",
-    "director": {
-      "name": "Akira Kurosawa",
-      "birth": 1910,
-      "death": 1998,
-    },
-    "featured": true,
-  },
-  {
-    "title": "In the Mood for Love",
-    "year": 2000,
-    "genre": "Drama",
-    "img": "https://media.timeout.com/images/105455977/750/562/image.jpg",
-    "director": {
-      "name": "Wong Kar-wai",
-      "birth": 1958,
-      "death": null,
-    },
-    "featured": false,
-  },
-  {
-    "title": "There Will Be Blood",
-    "year": 2007,
-    "genre": "Drama",
-    "img": "https://media.timeout.com/images/105455978/750/562/image.jpg",
-    "director": {
-      "name": "Paul Thomas Anderson",
-      "birth": 1970,
-      "death": null,
-    },
-    "featured": true,
-  },
-  {
-    "title": "Singin' in the Rain",
-    "year": 1952,
-    "genre": "Comedy",
-    "img": "https://media.timeout.com/images/105455980/750/562/image.jpg",
-    "director": {
-      "name": "Stanley Donen",
-      "birth": 1924,
-      "death": 2019,
-    },
-    "featured": true,
-  },
-];
-
-// Morgan middleware
-app.use(morgan("common"));
-
-// Body-parser middleware
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
+app.use(morgan("common"));
 
 // Welcome message
 app.get("/", (req, res) => {
   res.send("Welcome to Movie App!");
 });
 
-// Serving Static Files
-// app.use(express.static("public"));
-
-// Task 2.5
-
 // Return a list of ALL movies to the user
 app.get("/movies", (req, res) => {
-  res.status(200).json(topMovies);
+  Movies.find()
+    .then((movies) => {
+      res.status(201).json(movies);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
 });
 
 // Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user
-app.get("/movies/:title", (req, res) => {
-  const {
-    title
-  } = req.params;
-  const movie = topMovies.find(movie => movie.title === title);
-
-  if (movie) {
-    res.status(200).json(movie);
-  } else {
-    res.status(404).send("Movie not found");
-  }
+app.get("/movies/:Title", (req, res) => {
+  Movies.findOne({
+      Title: req.params.Title
+    })
+    .then((movie) => {
+      res.json(movie);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    })
 });
 
 // Return data about a genre (decription) by name/title (e.g., "Thriller")
-app.get("/movies/genre/:genreName", (req, res) => {
-  const {
-    genreName
-  } = req.params;
-  const genre = topMovies.find(movie => movie.genre === genreName).genre;
-
-  if (genre) {
-    res.status(200).json(genre);
-  } else {
-    res.status(400).send("Genre not found");
-  }
+app.get("/genre/:Name", (req, res) => {
+  Movies.findOne({
+      "Genre.Name": req.params.Name
+    })
+    .then((movie) => {
+      res.json(movie.Genre.Description);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
 });
 
 // Return data about a director (name, birth year, death year) by name 
-app.get("/movies/directors/:directorName", (req, res) => {
-  const {
-    directorName
-  } = req.params;
-  const director = topMovies.find(movie => movie.director.name === directorName).director;
-
-  if (director) {
-    res.status(200).json(director);
-  } else {
-    res.status(400).send("Director not found");
-  }
+app.get("/director/:Name", (req, res) => {
+  Movies.findOne({
+      'Director.Name': req.params.Name
+    })
+    .then((movie) => {
+      res.json(movie.Director);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
 });
 
-// Additional self-task: return a list of ALL users
+// Return a list of ALL users
 app.get("/users", (req, res) => {
-  res.status(200).json(users);
+  Users.find()
+    .then(function (users) {
+      res.status(201).json(users);
+    })
+    .catch(function (err) {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
 });
 
 // Allow new users to register
-app.post("/users", (req, res) => {
-  const newUser = req.body;
-
-  if (newUser.name) {
-    newUser.id = uuid.v4();
-    users.push(newUser);
-    res.status(201).json(newUser);
-  } else {
-    const message = "Missing name in request body.";
-    res.status(400).send(message);
-  }
+app.post('/users', (req, res) => {
+  Users.findOne({
+      Username: req.body.username
+    })
+    .then((user) => {
+      if (user) {
+        return res.status(400).send(req.body.Username + 'already exists');
+      } else {
+        Users
+          .create({
+            Username: req.body.Username,
+            Password: req.body.Password,
+            Email: req.body.Email,
+            Birthday: req.body.Birthday
+          })
+          .then((user) => {
+            res.status(201).json(user)
+          })
+          .catch((error) => {
+            console.error(error);
+            rest.status(500).send('Error: ' + error);
+          })
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send('Error: ' + error);
+    });
 });
+
+// Get a user by username 
+app.get("/users/:Username", (req, res) => {
+  Users.findOne({
+      Username: req.params.Username
+    })
+    .then((user) => {
+      res.json(user);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    })
+});
+
 
 // Allow users to update their user info (username)
-app.put("/users/:id", (req, res) => {
-  const {
-    id
-  } = req.params;
-  const updatedUser = req.body;
-
-  let user = users.find(user => user.id == id);
-
-  if (user) {
-    user.name = updatedUser.name;
-    res.status(200).json(user)
-  } else {
-    const message = "User not found.";
-    res.status(400).send(message);
-  }
+app.put('/users/:Username', (req, res) => {
+  Users.findOneAndUpdate({
+      Username: req.params.Username
+    }, {
+      $set: {
+        Username: req.body.Username,
+        Password: req.body.Password,
+        Email: req.body.Email,
+        Birthday: req.body.Birthday
+      }
+    }, {
+      new: true
+    },
+    (err, updatedUser) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+      } else {
+        res.json(updatedUser);
+      }
+    }
+  );
 });
 
-// Allow users to add a movie to their list of favorites (showing only a text that a movie has been added—more on this later)
-app.post("/users/:id/:movieTitle", (req, res) => {
-  const {
-    id,
-    movieTitle
-  } = req.params;
-
-  let user = users.find(user => user.id == id);
-
-  if (user) {
-    user.favMovies.push(movieTitle);
-    res.status(200).json(`${movieTitle} has been added to user ${id}'s array`);
-  } else {
-    const message = "Fav Movies not found";
-    res.status(400).send(message);
-  }
-
+// Allow users to add a movie to their list of favorites 
+app.post('/users/:Username/movies/:MovieID', (req, res) => {
+  Users.findOneAndUpdate({
+      Username: req.params.Username
+    }, {
+      $push: {
+        FavoriteMovies: req.params.MovieID
+      }
+    }, {
+      new: true
+    }, // this line makes sure that the updated document is returned
+    (err, updatedUser) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+      } else {
+        res.json(updatedUser);
+      }
+    });
 });
 
 // Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)
-app.delete("/users/:id/:movieTitle", (req, res) => {
-  const {
-    id,
-    movieTitle
-  } = req.params;
-
-  let user = users.find(user => user.id == id);
-
-  if (user) {
-    user.favMovies = user.favMovies.filter(title => title !== movieTitle);
-    res.status(200).json(`${movieTitle} has been removed from user ${id}'s array`);
-  } else {
-    const message = "Fav Movies not found";
-    res.status(400).send(message);
-  }
-
+app.delete("/users/:Username/movies/:MovieID", (req, res) => {
+  Users.findOneAndRemove({
+      Username: req.params.Username
+    }, {
+      $pull: {
+        FavoriteMovies: req.params.MovieID
+      }
+    }, {
+      new: true
+    },
+    (err, updatedUser) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+      } else {
+        res.json(updatedUser);
+      }
+    }
+  )
 });
 
-// Allow existing users to deregister (showing only a text that a user email has been removed—more on this later)
-app.delete("/users/:id", (req, res) => {
-  const {
-    id
-  } = req.params;
-
-  let user = users.find(user => user.id == id);
-
-  if (user) {
-    users = users.filter(user => user.id != id);
-    res.status(200).json(`User ${id} has been deleted`);
-  } else {
-    const message = "User ID not found";
-    res.status(400).send(message);
-  }
+// Allow existing users to deregister or delete a user by username
+app.delete('/users/:Username', (req, res) => {
+  Users.findOneAndRemove({
+      Username: req.params.Username
+    })
+    .then((user) => {
+      if (!user) {
+        res.status(400).send(req.params.Username + ' was not found');
+      } else {
+        res.status(200).send(req.params.Username + ' was deleted.');
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
 });
+
+// Access documentation.html using express. static
+app.use('/documentation', express.static("public"));
 
 //Error Handling
 app.use((err, req, res, next) => {
