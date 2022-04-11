@@ -26,6 +26,8 @@ app.use(bodyParser.urlencoded({
 
 app.use(morgan("common"));
 
+let auth = require('./auth')(app);
+
 // Welcome message
 app.get("/", (req, res) => {
   res.send("Welcome to Movie App!");
