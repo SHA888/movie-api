@@ -28,13 +28,16 @@ app.use(morgan("common"));
 
 let auth = require('./auth')(app);
 
+const passport = require('passport');
+require('./passport');
+
 // Welcome message
 app.get("/", (req, res) => {
   res.send("Welcome to Movie App!");
 });
 
 // Return a list of ALL movies to the user
-app.get("/movies", (req, res) => {
+app.get("/movies", passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find()
     .then((movies) => {
       res.status(201).json(movies);
