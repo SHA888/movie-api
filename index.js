@@ -1,7 +1,7 @@
-const express = require("express"),
-  bodyParser = require("body-parser"),
-  morgan = require("morgan"),
-  uuid = require("uuid");
+const express = require('express'),
+  bodyParser = require('body-parser'),
+  morgan = require('morgan'),
+  uuid = require('uuid');
 
 const {
   rest
@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.use(morgan("common"));
+app.use(morgan('common'));
 
 let auth = require('./auth')(app);
 
@@ -32,12 +32,12 @@ const passport = require('passport');
 require('./passport');
 
 // Welcome message
-app.get("/", (req, res) => {
-  res.send("Welcome to Movie App!");
+app.get('/', (req, res) => {
+  res.send('Welcome to Movie App!');
 });
 
 // Return a list of ALL movies to the user
-app.get("/movies", passport.authenticate('jwt', { session: false }), (req, res) => {
+app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find()
     .then((movies) => {
       res.status(201).json(movies);
@@ -49,7 +49,7 @@ app.get("/movies", passport.authenticate('jwt', { session: false }), (req, res) 
 });
 
 // Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user
-app.get("/movies/:Title", (req, res) => {
+app.get('/movies/:Title', (req, res) => {
   Movies.findOne({
       Title: req.params.Title
     })
@@ -62,10 +62,10 @@ app.get("/movies/:Title", (req, res) => {
     })
 });
 
-// Return data about a genre (decription) by name/title (e.g., "Thriller")
-app.get("/genre/:Name", (req, res) => {
+// Return data about a genre (decription) by name/title (e.g., 'Thriller')
+app.get('/genre/:Name', (req, res) => {
   Movies.findOne({
-      "Genre.Name": req.params.Name
+      'Genre.Name': req.params.Name
     })
     .then((movie) => {
       res.json(movie.Genre.Description);
@@ -77,7 +77,7 @@ app.get("/genre/:Name", (req, res) => {
 });
 
 // Return data about a director (name, birth year, death year) by name 
-app.get("/director/:Name", (req, res) => {
+app.get('/director/:Name', (req, res) => {
   Movies.findOne({
       'Director.Name': req.params.Name
     })
@@ -91,7 +91,7 @@ app.get("/director/:Name", (req, res) => {
 });
 
 // Return a list of ALL users
-app.get("/users", (req, res) => {
+app.get('/users', (req, res) => {
   Users.find()
     .then(function (users) {
       res.status(201).json(users);
@@ -134,7 +134,7 @@ app.post('/users', (req, res) => {
 });
 
 // Get a user by username 
-app.get("/users/:Username", (req, res) => {
+app.get('/users/:Username', (req, res) => {
   Users.findOne({
       Username: req.params.Username
     })
@@ -195,7 +195,7 @@ app.post('/users/:Username/movies/:MovieID', (req, res) => {
 });
 
 // Allow users to remove a movie from their list of favorites (showing only a text that a movie has been removed—more on this later)
-app.delete("/users/:Username/movies/:MovieID", (req, res) => {
+app.delete('/users/:Username/movies/:MovieID', (req, res) => {
   Users.findOneAndRemove({
       Username: req.params.Username
     }, {
@@ -235,15 +235,15 @@ app.delete('/users/:Username', (req, res) => {
 });
 
 // Access documentation.html using express. static
-app.use('/documentation', express.static("public"));
+app.use('/documentation', express.static('public'));
 
 //Error Handling
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).send("Something broke!");
+  res.status(500).send('Something broke!');
 });
 
 // listen for requests
 app.listen(8080, () => {
-  console.log("This app is listening on port 8080.");
+  console.log('This app is listening on port 8080.');
 });
