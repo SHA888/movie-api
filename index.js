@@ -125,8 +125,9 @@ app.get('/users', (req, res) => {
 
 // Allow new users to register
 app.post('/users', (req, res) => {
+  let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({
-      Username: req.body.username
+      Username: req.body.Username
     })
     .then((user) => {
       if (user) {
