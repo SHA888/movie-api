@@ -1,3 +1,5 @@
+const express = require('express');
+
 const jwtSecret = 'your_jwt_secret';
 
 const jwt = require('jsonwebtoken'),

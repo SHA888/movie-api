@@ -24,11 +24,6 @@ mongoose.connect('mongodb://localhost:27017/test', {
 
 const app = express();
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-
 app.use(morgan('common'));
 
 const cors = require('cors');
@@ -47,6 +42,11 @@ app.use(cors({
     }
     return callback(null, true);
   }
+}));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
 }));
 
 let auth = require('./auth')(app);
