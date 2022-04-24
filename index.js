@@ -17,11 +17,6 @@ const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 
-// mongoose.connect('mongodb://localhost:27017/test', {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true
-// });
-
 mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -65,9 +60,21 @@ app.get('/', (req, res) => {
 });
 
 // Return a list of ALL movies to the user
-app.get('/movies', passport.authenticate('jwt', {
-  session: false
-}), (req, res) => {
+// app.get('/movies', passport.authenticate('jwt', {
+//   session: false
+// }), (req, res) => {
+//   Movies.find()
+//     .then((movies) => {
+//       res.status(201).json(movies);
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//       res.status(500).send('Error: ' + error);
+//     });
+// });
+
+// Temporary disable authentication to allow React app access the API
+app.get('/movies', (req, res) => {
   Movies.find()
     .then((movies) => {
       res.status(201).json(movies);
@@ -77,6 +84,7 @@ app.get('/movies', passport.authenticate('jwt', {
       res.status(500).send('Error: ' + error);
     });
 });
+
 
 // Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user
 app.get('/movies/:Title', (req, res) => {
